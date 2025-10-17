@@ -4,253 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Allana Fitz Fotografia</title>
-    <style>
-        body {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Georgia', serif;
-            background: linear-gradient(135deg, #f8f6f3 0%, #f1ede8 100%);
-            color: #4a4a4a;
-            min-height: 100%;
-        }
-
-        html {
-            height: 100%;
-        }
-
-        .header {
-            text-align: center;
-            padding: 3rem 2rem;
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(200, 190, 180, 0.3);
-        }
-
-        .logo {
-            font-size: 2.5rem;
-            font-weight: 300;
-            color: #8b7355;
-            margin-bottom: 0.5rem;
-            letter-spacing: 2px;
-        }
-
-        .tagline {
-            font-size: 1rem;
-            color: #a0958a;
-            font-style: italic;
-        }
-
-        .filter-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            padding: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            padding: 0.8rem 1.5rem;
-            background: rgba(255, 255, 255, 0.7);
-            border: 1px solid rgba(139, 115, 85, 0.3);
-            border-radius: 25px;
-            color: #8b7355;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 0.9rem;
-            letter-spacing: 0.5px;
-        }
-
-        .filter-btn:hover,
-        .filter-btn.active {
-            background: #8b7355;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(139, 115, 85, 0.3);
-        }
-
-        .albums-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .album-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .album-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-        }
-
-        .album-cover {
-            width: 100%;
-            height: 250px;
-            background: linear-gradient(45deg, #d4c4b0, #e8ddd4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: rgba(139, 115, 85, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .album-cover::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgba(139,115,85,0.1)"><path d="M9 2l3 2 3-2v20l-3-2-3 2V2z"/><circle cx="12" cy="12" r="3" fill="rgba(139,115,85,0.05)"/></svg>') center/cover;
-        }
-
-        .album-info {
-            padding: 1.5rem;
-            text-align: center;
-        }
-
-        .client-name {
-            font-size: 1.3rem;
-            font-weight: 400;
-            color: #8b7355;
-            margin-bottom: 0.5rem;
-        }
-
-        .event-type {
-            font-size: 0.9rem;
-            color: #a0958a;
-            font-style: italic;
-        }
-
-        .photo-count {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            color: #8b7355;
-        }
-
-        .gallery-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 1000;
-            overflow-y: auto;
-        }
-
-        .gallery-header {
-            position: sticky;
-            top: 0;
-            background: rgba(0, 0, 0, 0.9);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            backdrop-filter: blur(10px);
-        }
-
-        .gallery-title {
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 300;
-        }
-
-        .close-btn {
-            color: white;
-            font-size: 2rem;
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 50%;
-            transition: background 0.3s ease;
-        }
-
-        .close-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1rem;
-            padding: 2rem;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .gallery-photo {
-            aspect-ratio: 4/3;
-            background: linear-gradient(45deg, #2a2a2a, #404040);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: rgba(255, 255, 255, 0.3);
-            font-size: 2rem;
-            transition: transform 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .gallery-photo:hover {
-            transform: scale(1.02);
-        }
-
-        .gallery-photo::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="rgba(255,255,255,0.1)"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>') center/30%;
-            background-repeat: no-repeat;
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        @media (max-width: 768px) {
-            .albums-grid {
-                grid-template-columns: 1fr;
-                padding: 1rem;
-            }
-            
-            .filter-tabs {
-                padding: 1rem;
-            }
-            
-            .filter-btn {
-                padding: 0.6rem 1rem;
-                font-size: 0.8rem;
-            }
-            
-            .gallery-grid {
-                grid-template-columns: 1fr;
-                padding: 1rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="header">
@@ -268,7 +22,6 @@
     </div>
 
     <div class="albums-grid" id="albumsGrid">
-        <!-- Casamentos -->
         <div class="album-card" data-category="casamento" data-client="Ana & Carlos" data-type="Casamento">
             <div class="album-cover">💒</div>
             <div class="photo-count">28 fotos</div>
@@ -287,7 +40,6 @@
             </div>
         </div>
 
-        <!-- 15 Anos -->
         <div class="album-card" data-category="15anos" data-client="Isabella" data-type="15 Anos">
             <div class="album-cover">👑</div>
             <div class="photo-count">25 fotos</div>
@@ -306,7 +58,6 @@
             </div>
         </div>
 
-        <!-- Aniversários -->
         <div class="album-card" data-category="aniversario" data-client="Pedro - 30 anos" data-type="Aniversário">
             <div class="album-cover">🎂</div>
             <div class="photo-count">18 fotos</div>
@@ -325,7 +76,6 @@
             </div>
         </div>
 
-        <!-- Formaturas -->
         <div class="album-card" data-category="formatura" data-client="Turma Medicina 2024" data-type="Formatura">
             <div class="album-cover">🎓</div>
             <div class="photo-count">30 fotos</div>
@@ -335,7 +85,6 @@
             </div>
         </div>
 
-        <!-- Ensaios -->
         <div class="album-card" data-category="ensaio" data-client="Camila" data-type="Ensaio Fotográfico">
             <div class="album-cover">📸</div>
             <div class="photo-count">20 fotos</div>
@@ -355,7 +104,6 @@
         </div>
     </div>
 
-    <!-- Modal da Galeria -->
     <div class="gallery-modal" id="galleryModal">
         <div class="gallery-header">
             <div class="gallery-title" id="galleryTitle"></div>
@@ -364,94 +112,6 @@
         <div class="gallery-grid" id="galleryGrid"></div>
     </div>
 
-    <script>
-        // Dados das fotos para cada álbum (simulado)
-        const albumPhotos = {
-            'Ana & Carlos': Array.from({length: 28}, (_, i) => `Foto ${i + 1} - Casamento Ana & Carlos`),
-            'Marina & João': Array.from({length: 30}, (_, i) => `Foto ${i + 1} - Casamento Marina & João`),
-            'Isabella': Array.from({length: 25}, (_, i) => `Foto ${i + 1} - 15 Anos Isabella`),
-            'Sophia': Array.from({length: 22}, (_, i) => `Foto ${i + 1} - 15 Anos Sophia`),
-            'Pedro - 30 anos': Array.from({length: 18}, (_, i) => `Foto ${i + 1} - Aniversário Pedro`),
-            'Família Silva': Array.from({length: 24}, (_, i) => `Foto ${i + 1} - Aniversário Família Silva`),
-            'Turma Medicina 2024': Array.from({length: 30}, (_, i) => `Foto ${i + 1} - Formatura Medicina`),
-            'Camila': Array.from({length: 20}, (_, i) => `Foto ${i + 1} - Ensaio Camila`),
-            'Lucas & Maria': Array.from({length: 26}, (_, i) => `Foto ${i + 1} - Ensaio Lucas & Maria`)
-        };
-
-        // Filtros
-        const filterBtns = document.querySelectorAll('.filter-btn');
-        const albumCards = document.querySelectorAll('.album-card');
-
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Remove active de todos os botões
-                filterBtns.forEach(b => b.classList.remove('active'));
-                // Adiciona active ao botão clicado
-                btn.classList.add('active');
-
-                const filter = btn.dataset.filter;
-
-                albumCards.forEach(card => {
-                    if (filter === 'todos' || card.dataset.category === filter) {
-                        card.classList.remove('hidden');
-                    } else {
-                        card.classList.add('hidden');
-                    }
-                });
-            });
-        });
-
-        // Modal da galeria
-        const galleryModal = document.getElementById('galleryModal');
-        const galleryTitle = document.getElementById('galleryTitle');
-        const galleryGrid = document.getElementById('galleryGrid');
-        const closeBtn = document.getElementById('closeBtn');
-
-        albumCards.forEach(card => {
-            card.addEventListener('click', () => {
-                const clientName = card.dataset.client;
-                const eventType = card.dataset.type;
-                const photos = albumPhotos[clientName] || [];
-
-                // Atualiza o título
-                galleryTitle.textContent = `${clientName} - ${eventType}`;
-
-                // Limpa a galeria
-                galleryGrid.innerHTML = '';
-
-                // Adiciona as fotos
-                photos.forEach((photo, index) => {
-                    const photoDiv = document.createElement('div');
-                    photoDiv.className = 'gallery-photo';
-                    photoDiv.innerHTML = `📷<span style="position: absolute; bottom: 10px; left: 10px; font-size: 0.8rem; color: rgba(255,255,255,0.7);">${index + 1}</span>`;
-                    galleryGrid.appendChild(photoDiv);
-                });
-
-                // Mostra o modal
-                galleryModal.style.display = 'block';
-                document.body.style.overflow = 'hidden';
-            });
-        });
-
-        // Fechar modal
-        closeBtn.addEventListener('click', closeModal);
-        galleryModal.addEventListener('click', (e) => {
-            if (e.target === galleryModal) {
-                closeModal();
-            }
-        });
-
-        function closeModal() {
-            galleryModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        // Fechar modal com ESC
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && galleryModal.style.display === 'block') {
-                closeModal();
-            }
-        });
-    </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98e8d9f0333a5686',t:'MTc2MDQ2MzUxNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+    <script src="script.js"></script>
+</body>
 </html>
